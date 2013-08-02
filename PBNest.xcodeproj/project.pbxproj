@@ -23,6 +23,18 @@
 		B9C493A717AA2962008B144E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C4938217AA2962008B144E /* Foundation.framework */; };
 		B9C493AF17AA2962008B144E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9C493AD17AA2962008B144E /* InfoPlist.strings */; };
 		B9C493B217AA2963008B144E /* PBNestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C493B117AA2963008B144E /* PBNestTests.m */; };
+		B9C493BD17AA2998008B144E /* PebbleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C493BB17AA2998008B144E /* PebbleKit.framework */; };
+		B9C493BE17AA2998008B144E /* PebbleVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C493BC17AA2998008B144E /* PebbleVendor.framework */; };
+		B9C493C017AA299E008B144E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C493BF17AA299E008B144E /* CoreLocation.framework */; };
+		B9C493C217AA29A3008B144E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C493C117AA29A3008B144E /* MessageUI.framework */; };
+		B9C493C717AA29BE008B144E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C493C317AA29BE008B144E /* CoreMotion.framework */; };
+		B9C493C817AA29BE008B144E /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C493C417AA29BE008B144E /* CoreBluetooth.framework */; };
+		B9C493C917AA29BE008B144E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C493C517AA29BE008B144E /* libz.dylib */; };
+		B9C493CA17AA29BE008B144E /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C493C617AA29BE008B144E /* ExternalAccessory.framework */; };
+		B9C493CD17AA36E6008B144E /* noisy_grid_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C493CB17AA36E6008B144E /* noisy_grid_@2X.png */; };
+		B9C493CE17AA36E6008B144E /* noisy_grid.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C493CC17AA36E6008B144E /* noisy_grid.png */; };
+		B9C493D017AA3FE4008B144E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C493CF17AA3FE4008B144E /* Icon.png */; };
+		B9C493D217AA3FE6008B144E /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C493D117AA3FE6008B144E /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +70,18 @@
 		B9C493AE17AA2962008B144E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B9C493B017AA2963008B144E /* PBNestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBNestTests.h; sourceTree = "<group>"; };
 		B9C493B117AA2963008B144E /* PBNestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PBNestTests.m; sourceTree = "<group>"; };
+		B9C493BB17AA2998008B144E /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PebbleKit.framework; sourceTree = "<group>"; };
+		B9C493BC17AA2998008B144E /* PebbleVendor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PebbleVendor.framework; sourceTree = "<group>"; };
+		B9C493BF17AA299E008B144E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B9C493C117AA29A3008B144E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		B9C493C317AA29BE008B144E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		B9C493C417AA29BE008B144E /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		B9C493C517AA29BE008B144E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		B9C493C617AA29BE008B144E /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		B9C493CB17AA36E6008B144E /* noisy_grid_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noisy_grid_@2X.png"; sourceTree = "<group>"; };
+		B9C493CC17AA36E6008B144E /* noisy_grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noisy_grid.png; sourceTree = "<group>"; };
+		B9C493CF17AA3FE4008B144E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		B9C493D117AA3FE6008B144E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +92,14 @@
 				B9C4938117AA2962008B144E /* UIKit.framework in Frameworks */,
 				B9C4938317AA2962008B144E /* Foundation.framework in Frameworks */,
 				B9C4938517AA2962008B144E /* CoreGraphics.framework in Frameworks */,
+				B9C493BD17AA2998008B144E /* PebbleKit.framework in Frameworks */,
+				B9C493BE17AA2998008B144E /* PebbleVendor.framework in Frameworks */,
+				B9C493C017AA299E008B144E /* CoreLocation.framework in Frameworks */,
+				B9C493C217AA29A3008B144E /* MessageUI.framework in Frameworks */,
+				B9C493C717AA29BE008B144E /* CoreMotion.framework in Frameworks */,
+				B9C493C817AA29BE008B144E /* CoreBluetooth.framework in Frameworks */,
+				B9C493C917AA29BE008B144E /* libz.dylib in Frameworks */,
+				B9C493CA17AA29BE008B144E /* ExternalAccessory.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +119,8 @@
 		B9C4937417AA2962008B144E = {
 			isa = PBXGroup;
 			children = (
+				B9C493D117AA3FE6008B144E /* Icon@2x.png */,
+				B9C493CF17AA3FE4008B144E /* Icon.png */,
 				B9C4938617AA2962008B144E /* PBNest */,
 				B9C493AA17AA2962008B144E /* PBNestTests */,
 				B9C4937F17AA2962008B144E /* Frameworks */,
@@ -106,9 +140,17 @@
 		B9C4937F17AA2962008B144E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B9C493C317AA29BE008B144E /* CoreMotion.framework */,
+				B9C493C417AA29BE008B144E /* CoreBluetooth.framework */,
+				B9C493C517AA29BE008B144E /* libz.dylib */,
+				B9C493C617AA29BE008B144E /* ExternalAccessory.framework */,
+				B9C4938417AA2962008B144E /* CoreGraphics.framework */,
+				B9C493C117AA29A3008B144E /* MessageUI.framework */,
+				B9C493BF17AA299E008B144E /* CoreLocation.framework */,
+				B9C493BB17AA2998008B144E /* PebbleKit.framework */,
+				B9C493BC17AA2998008B144E /* PebbleVendor.framework */,
 				B9C4938017AA2962008B144E /* UIKit.framework */,
 				B9C4938217AA2962008B144E /* Foundation.framework */,
-				B9C4938417AA2962008B144E /* CoreGraphics.framework */,
 				B9C493A417AA2962008B144E /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
@@ -117,6 +159,8 @@
 		B9C4938617AA2962008B144E /* PBNest */ = {
 			isa = PBXGroup;
 			children = (
+				B9C493CB17AA36E6008B144E /* noisy_grid_@2X.png */,
+				B9C493CC17AA36E6008B144E /* noisy_grid.png */,
 				B9C4938F17AA2962008B144E /* PBAppDelegate.h */,
 				B9C4939017AA2962008B144E /* PBAppDelegate.m */,
 				B9C4939817AA2962008B144E /* PBViewController.h */,
@@ -237,6 +281,10 @@
 				B9C4939517AA2962008B144E /* Default@2x.png in Resources */,
 				B9C4939717AA2962008B144E /* Default-568h@2x.png in Resources */,
 				B9C4939D17AA2962008B144E /* PBViewController.xib in Resources */,
+				B9C493CD17AA36E6008B144E /* noisy_grid_@2X.png in Resources */,
+				B9C493CE17AA36E6008B144E /* noisy_grid.png in Resources */,
+				B9C493D017AA3FE4008B144E /* Icon.png in Resources */,
+				B9C493D217AA3FE6008B144E /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,9 +430,14 @@
 		B9C493B617AA2963008B144E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PBNest/PBNest-Prefix.pch";
 				INFOPLIST_FILE = "PBNest/PBNest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -393,9 +446,14 @@
 		B9C493B717AA2963008B144E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PBNest/PBNest-Prefix.pch";
 				INFOPLIST_FILE = "PBNest/PBNest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

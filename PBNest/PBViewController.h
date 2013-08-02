@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PBViewController : UIViewController
+#import <PebbleKit/PebbleKit.h>
+@interface PBViewController : UIViewController <UITextFieldDelegate> {
+    NSTimer *wat;
+}
+@property (strong, nonatomic) IBOutlet UITextField *timeInt;
+@property (strong, nonatomic) IBOutlet UITextField *usernameField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordField;
+- (IBAction)updateStart:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *updateBtn;
 
 @end
