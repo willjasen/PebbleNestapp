@@ -75,9 +75,10 @@
                 NSDictionary *current_state = [root valueForKey:@"current_state"];
                 NSNumber *temperatureNumber = current_state[@"temperature"];
                 
+                // Format the current temperature to be sent to watch
                 NSString *formattedTemp = @"Current: ";
                 formattedTemp = [formattedTemp stringByAppendingString:[numberFormat stringFromNumber:temperatureNumber]];
-                formattedTemp = [formattedTemp stringByAppendingString:@" \u00B0"];
+                formattedTemp = [formattedTemp stringByAppendingString:@" \u00B0"];  // appends a degree symbol
                 formattedTemp = [formattedTemp stringByAppendingString:temperatureScale];
                 
                 // Get the target temperature:
@@ -85,13 +86,19 @@
                 NSNumber *targetTemperatureNumber = target[@"temperature"];
                 targetTemperature = targetTemperatureNumber;
                 
+                // Format the target temperature to be sent to watch
                 NSString *formattedTargetTemp = @"Target: ";
                 formattedTargetTemp = [formattedTargetTemp stringByAppendingString:[numberFormat stringFromNumber:targetTemperatureNumber]];
                 formattedTargetTemp = [formattedTargetTemp stringByAppendingString:@" \u00B0"];
                 formattedTargetTemp = [formattedTargetTemp stringByAppendingString:temperatureScale];
-
-            
                 
+                // Debugging output
+                message = formattedTemp;
+                message = [message stringByAppendingString:@"\n"];
+                message = [message stringByAppendingString:formattedTargetTemp];
+                showAlert();
+                
+
                 // Send data to watch:
                 // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definitions on the watch's end:
                 //NSNumber *iconKey = @(0); // This is our custom-defined key for the icon ID, which is of type uint8_t.
@@ -126,7 +133,7 @@
     
     // Set the temperature
     
-        
+    
         // Send data to web server
         [_targetWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *updateFromWatch) {
             
@@ -141,19 +148,23 @@
                 
             };
             
-            message = @"Received update from watch!";
-            showAlert();
+            message = @"Button pressed! \n";
             
             // Increment temperature by 1
             int value = [targetTemperature intValue];
             NSNumber *newTemperature = [NSNumber numberWithInt:value+1];
             NSString *strNewTemp = [newTemperature stringValue];
             
+            // Show new target temperature
+            message = [message stringByAppendingString:@"New target temperature: "];
+            message = [message stringByAppendingString:strNewTemp];
+            showAlert();
             
-            NSString *apiPOSTURLString = [NSString stringWithFormat:@"http://%@/nest/setTemp.php?email=%@&password=%@&tempInt=%@", self.hostField.text, self.usernameField.text, self.passwordField.text, strNewTemp];
+            
+            /*NSString *apiPOSTURLString = [NSString stringWithFormat:@"http://%@/nest/setTemp.php?email=%@&password=%@&tempInt=%@", self.hostField.text, self.usernameField.text, self.passwordField.text, strNewTemp];
             NSURLRequest *POSTrequest = [NSURLRequest requestWithURL:[NSURL URLWithString:apiPOSTURLString]];
             NSOperationQueue *POSTqueue = [[NSOperationQueue alloc] init];
-            [NSURLConnection sendAsynchronousRequest:POSTrequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            [NSURLConnection sendAsynchronousRequest:POSTrequest queue:POSTqueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                 NSHTTPURLResponse *httpResponse = nil;
                 if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                     httpResponse = (NSHTTPURLResponse *) response;
@@ -168,7 +179,7 @@
                 
                 
                 
-            }];
+            }];*/
             
             
             return true;
@@ -267,7 +278,7 @@
     return YES;
 }
 - (IBAction)updateStart:(id)sender {
-    NSLog(@"stoping");
+    NSLog(@"stopping");
     [wat invalidate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.usernameField.text forKey:@"username"];
