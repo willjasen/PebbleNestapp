@@ -24,7 +24,10 @@
         return;
     }
     
-    // Fetch weather at current location using openweathermap.org's JSON API:
+    __block NSDictionary *dictRoot = nil;
+    __block NSNumber *targetTemperature = nil;
+    
+    // Fetch the Nest's attributes
     NSString *apiURLString = [NSString stringWithFormat:@"http://%@/nest/getTemp.php?email=%@&password=%@", self.hostField.text, self.usernameField.text, self.passwordField.text];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:apiURLString]];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -47,7 +50,7 @@
         
         // Check for error or non-OK statusCode:
         if (error || httpResponse.statusCode != 200) {
-            message = @"Error fetching weather";
+            message = @"Error fetching Nest attributes";
             showAlert();
             return;
         }
@@ -55,6 +58,7 @@
         // Parse the JSON response:
         NSError *jsonError = nil;
         NSDictionary *root = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        dictRoot = root;
         @try {
             if (jsonError == nil && root) {
                 // TODO: type checking / validation, this is really dangerous...
@@ -79,37 +83,14 @@
                 // Get the target temperature:
                 NSDictionary *target = [root valueForKey:@"target"];
                 NSNumber *targetTemperatureNumber = target[@"temperature"];
+                targetTemperature = targetTemperatureNumber;
                 
                 NSString *formattedTargetTemp = @"Target: ";
                 formattedTargetTemp = [formattedTargetTemp stringByAppendingString:[numberFormat stringFromNumber:targetTemperatureNumber]];
                 formattedTargetTemp = [formattedTargetTemp stringByAppendingString:@" \u00B0"];
                 formattedTargetTemp = [formattedTargetTemp stringByAppendingString:temperatureScale];
 
-                
-                
-                // Get the humdity:
-                // NSNumber *humidityNumber = root[@"2"];
-                // NSString *formattedHumidity = [NSString stringWithFormat:@"%@", humidityNumber];
-                
-                // Get the mode
-                // NSString *houseMode = root[@"3"];
-                
-                // NSString *serial = root[@"serial_number"];
-                
-                // Loop through response and output
-                /*for(NSString* key in root)
-                {
-                    NSString *output = key;
-                    NSString *value = [root objectForKey:key];
-                    message = [output stringByAppendingString:@": "];
-                    message = [output stringByAppendingString:value];
-                    showAlert();
-                }*/
-                
-                
-                // Get weather icon:
-                //NSNumber *weatherIconNumber = firstListItem[@"weather"][0][@"icon"];
-                //uint8_t weatherIconID = [self getIconFromWeatherId:[weatherIconNumber integerValue]];
+            
                 
                 // Send data to watch:
                 // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definitions on the watch's end:
@@ -125,17 +106,74 @@
                                           //modeKey:houseMode
                                         };
                 [_targetWatch appMessagesPushUpdate:update onSent:^(PBWatch *watch, NSDictionary *update, NSError *error) {
-                    message = error ? [error localizedDescription] : @"Update sent!";
+                    message = error ? [error localizedDescription] : @"Update to watch sent!";
                     showAlert();
                 }];
+                
                 return;
             }
         }
         @catch (NSException *exception) {
         }
-        message = @"Error parsing response";
+        message = @"Error parsing retrieval response";
         showAlert();
+        
+        
+        
     }];
+    
+    
+    
+    // Set the temperature
+    
+        
+        // Send data to web server
+        [_targetWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *updateFromWatch) {
+            
+            // NSURLConnection's completionHandler is called on the background thread.
+            // Prepare a block to show an alert on the main thread:
+            __block NSString *message = @"";
+            void (^showAlert)(void) = ^{
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    //     [[[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    NSLog(@"%@",message);
+                }];
+                
+            };
+            
+            message = @"Received update from watch!";
+            showAlert();
+            
+            // Increment temperature by 1
+            int value = [targetTemperature intValue];
+            NSNumber *newTemperature = [NSNumber numberWithInt:value+1];
+            NSString *strNewTemp = [newTemperature stringValue];
+            
+            
+            NSString *apiPOSTURLString = [NSString stringWithFormat:@"http://%@/nest/setTemp.php?email=%@&password=%@&tempInt=%@", self.hostField.text, self.usernameField.text, self.passwordField.text, strNewTemp];
+            NSURLRequest *POSTrequest = [NSURLRequest requestWithURL:[NSURL URLWithString:apiPOSTURLString]];
+            NSOperationQueue *POSTqueue = [[NSOperationQueue alloc] init];
+            [NSURLConnection sendAsynchronousRequest:POSTrequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                NSHTTPURLResponse *httpResponse = nil;
+                if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                    httpResponse = (NSHTTPURLResponse *) response;
+                }
+                
+                // Check for error or non-OK statusCode:
+                if (error || httpResponse.statusCode != 200) {
+                    message = @"Error setting temperature";
+                    showAlert();
+                    return;
+                }
+                
+                
+                
+            }];
+            
+            
+            return true;
+        }];
+
 }
 
 - (void)setTargetWatch:(PBWatch*)watch {
@@ -166,6 +204,7 @@
             NSLog(@"%@",message);
         }
     }];
+    
 }
 
 - (void)viewDidLoad
