@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 - (IBAction)updateStart:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *updateBtn;
+@property (strong, nonatomic) IBOutlet UITextField *hostField;
 
 @end

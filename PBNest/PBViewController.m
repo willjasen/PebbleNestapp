@@ -25,7 +25,7 @@
     }
     
     // Fetch weather at current location using openweathermap.org's JSON API:
-    NSString *apiURLString = [NSString stringWithFormat:@"http://pbdb.dylanlaws.com/nest/getTemp.php?email=%@&password=%@", self.usernameField.text, self.passwordField.text];
+    NSString *apiURLString = [NSString stringWithFormat:@"http://%@/nest/getTemp.php?email=%@&password=%@", self.hostField.text, self.usernameField.text, self.passwordField.text];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:apiURLString]];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
