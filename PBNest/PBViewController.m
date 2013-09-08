@@ -59,10 +59,53 @@
             if (jsonError == nil && root) {
                 // TODO: type checking / validation, this is really dangerous...
                 
+                // Set the number format
+                NSNumberFormatter *numberFormat = [[NSNumberFormatter alloc] init ];
+                [numberFormat setNumberStyle:NSNumberFormatterDecimalStyle];
+                [numberFormat setMaximumFractionDigits:0];
                 
-                // Get the temperature:
-                NSNumber *temperatureNumber = root[@"1"]; // in degrees Kelvin
-                NSString *formattedTemp = [NSString stringWithFormat:@"%@", temperatureNumber];
+                // Get the current temperature scale (Fahrenheit or Celsius)
+                NSString *temperatureScale = root[@"scale"];
+                
+                // Get the current temperature:
+                NSDictionary *current_state = [root valueForKey:@"current_state"];
+                NSNumber *temperatureNumber = current_state[@"temperature"];
+                
+                NSString *formattedTemp = @"Current: ";
+                formattedTemp = [formattedTemp stringByAppendingString:[numberFormat stringFromNumber:temperatureNumber]];
+                formattedTemp = [formattedTemp stringByAppendingString:@" \u00B0"];
+                formattedTemp = [formattedTemp stringByAppendingString:temperatureScale];
+                
+                // Get the target temperature:
+                NSDictionary *target = [root valueForKey:@"target"];
+                NSNumber *targetTemperatureNumber = target[@"temperature"];
+                
+                NSString *formattedTargetTemp = @"Target: ";
+                formattedTargetTemp = [formattedTargetTemp stringByAppendingString:[numberFormat stringFromNumber:targetTemperatureNumber]];
+                formattedTargetTemp = [formattedTargetTemp stringByAppendingString:@" \u00B0"];
+                formattedTargetTemp = [formattedTargetTemp stringByAppendingString:temperatureScale];
+
+                
+                
+                // Get the humdity:
+                // NSNumber *humidityNumber = root[@"2"];
+                // NSString *formattedHumidity = [NSString stringWithFormat:@"%@", humidityNumber];
+                
+                // Get the mode
+                // NSString *houseMode = root[@"3"];
+                
+                // NSString *serial = root[@"serial_number"];
+                
+                // Loop through response and output
+                /*for(NSString* key in root)
+                {
+                    NSString *output = key;
+                    NSString *value = [root objectForKey:key];
+                    message = [output stringByAppendingString:@": "];
+                    message = [output stringByAppendingString:value];
+                    showAlert();
+                }*/
+                
                 
                 // Get weather icon:
                 //NSNumber *weatherIconNumber = firstListItem[@"weather"][0][@"icon"];
@@ -71,9 +114,16 @@
                 // Send data to watch:
                 // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definitions on the watch's end:
                 //NSNumber *iconKey = @(0); // This is our custom-defined key for the icon ID, which is of type uint8_t.
-                NSNumber *temperatureKey = @(1); // This is our custom-defined key for the temperature string.
+                NSNumber *currentTemperatureKey = @(1); // This is our custom-defined key for the current temperature string.
+                NSNumber *targetTemperatureKey = @(0); // This is out custom-defined key for the target temperature string.
+                // NSNumber *humidityKey = @(0); // This is our custom-defined key for the humidity string.
+                // NSNumber *modeKey = @(2); // This is our custom-defined key for the humidity string.
                 NSDictionary *update = @{
-                                          temperatureKey:[NSString stringWithFormat:@"%@", formattedTemp] };
+                                          currentTemperatureKey:[NSString stringWithFormat:@"%@", formattedTemp],
+                                          targetTemperatureKey:[NSString stringWithFormat:@"%@", formattedTargetTemp]
+                                          //humidityKey:[NSString stringWithFormat:@"%@", formattedHumidity],
+                                          //modeKey:houseMode
+                                        };
                 [_targetWatch appMessagesPushUpdate:update onSent:^(PBWatch *watch, NSDictionary *update, NSError *error) {
                     message = error ? [error localizedDescription] : @"Update sent!";
                     showAlert();
